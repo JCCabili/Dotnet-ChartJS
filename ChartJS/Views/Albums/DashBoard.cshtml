@@ -1,0 +1,90 @@
+﻿<html>
+    <head>
+        <script src="~/Scripts/Chart.min.js"></script>
+        <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            #chartContainer {
+                /*width:400px;*/
+                height:400px;
+                border:1px solid #b6ff00;
+                padding:20px;
+                border-radius:4px;
+            }
+        </style>
+    </head>
+    <body>
+    
+        <div id="chartContainer">
+            <canvas id="barChart">
+            </canvas>
+        </div>
+        <script>
+            var saleList = @Html.Raw(Json.Encode(ViewBag.salesList));
+            var dateList = @Html.Raw(Json.Encode(ViewBag.dateList));
+            var myDatas = [{
+                label:"Bar Chart Example",
+                data:saleList,
+                backgroundColor:[
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor:[
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                     'rgba(75, 192, 192, 0.2)',
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderWidth:1
+            }];
+
+            var myOptions = {
+                maintainAspectRatio:false,
+                scales:{
+                    yAxes:[{
+                        ticks:{
+                            beginAtZero:true
+                        } 
+                    }] 
+                },
+                legend:{display:false},
+            };
+
+
+
+            var ctx = $("#barChart");
+            var bacChart = new Chart(ctx,{
+                type:'pie', //pie,bar
+                data:{
+                    labels:dateList,
+                    datasets:myDatas,
+                },
+                options:myOptions,
+            });
+
+        </script>
+    </body>
+</html>
